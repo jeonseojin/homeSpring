@@ -1,7 +1,22 @@
 @charset "UTF-8";
 
-
 .container.body{
 	margin-top: 20px;
 	min-height: 800px;
+}
+.title-w{
+	width: 350px;
+	text-align: center;
+}
+.login-con{
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 100px;
+}
+.login-box{
+	width: 300px;
+	margin: 10px auto;
+}
+.login-box:nth-of-type(1) {
+	margin-top: 30px;
 }

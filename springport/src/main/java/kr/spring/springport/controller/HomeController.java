@@ -28,4 +28,19 @@ public class HomeController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/main/signin", method = RequestMethod.GET)
+	public ModelAndView signin(ModelAndView mv) {
+		logger.info("URI:/signin/GET");
+		mv.setViewName("/main/signin");
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "/board/list", method = RequestMethod.GET)
+	public ModelAndView boardList(ModelAndView mv) {
+		logger.info("URI:/board/list/GET");
+		mv.setViewName("/board/list");
+		return mv;
+	}
+	
 }
