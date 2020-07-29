@@ -6,5 +6,7 @@ public interface UserService {
 
 	UserVo getUser(String id);
 
+	UserVo isUser(UserVo user);
+
 
 }

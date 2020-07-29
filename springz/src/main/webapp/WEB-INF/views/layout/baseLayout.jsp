@@ -5,7 +5,7 @@
  
 <html>
 <head>
-<title>스프링</title>
+<title>연습</title>
 <jsp:include page="/WEB-INF/views/include/head.jsp"></jsp:include>
 </head>
 <body>
