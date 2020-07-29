@@ -35,6 +35,24 @@
 	            <beans:value>/WEB-INF/spring/tiles-def.xml</beans:value>
 	        </beans:list>
 	    </beans:property>
-	</beans:bean> 
+	</beans:bean>
+	 
+	<!-- 로그인 유지 -->
+	<beans:bean id="loginInterceptor" 
+		class="kr.green.springz.interceptor.LoginInterceptor"></beans:bean>
+	<beans:bean id="authInterceptor" 
+	class="kr.green.springz.interceptor.AuthInterceptor"></beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/"/>
+			<mapping path="/main/signin"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<interceptor>
+        <mapping path="/board/list"/>
+        <beans:ref bean="authInterceptor"/>
+    </interceptor>
+	</interceptors>
 	
 </beans:beans>

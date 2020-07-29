@@ -52,7 +52,7 @@ public class HomeController {
 		}else {
 			mv.setViewName("redirect:/");
 		}
-		System.out.println(user);
+		System.out.println(dbUser);
 		return mv;
 	}
 
