@@ -1,0 +1,21 @@
+@charset "UTF-8";
+.container.body{
+	min-height: 800px;
+	margin-top: 20px;
+}
+.signin-box{
+	width: 400px;
+	height: 500px;
+	text-align: center;
+	background-color: #e9ecef;
+	margin: 0 auto;
+	padding: 50px;
+}
+.signin-box>h1{
+	color: silver;
+	margin-bottom: 50px;
+}
+.signin-input{
+	margin-bottom: 20px;
+	width: 300px;
+}
