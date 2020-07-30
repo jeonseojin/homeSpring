@@ -1,6 +1,9 @@
 package kr.green.springz.vo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 public class BoardVo {
 	private int num;
@@ -40,11 +43,21 @@ public class BoardVo {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegisterDate() {
-		return registerDate;
+	public String getRegisterDate() {
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return transFormat.format(registerDate);
 	}
-	public void setRegisterDate(Date refisterDate) {
-		this.registerDate = refisterDate;
+	public void setRegisterDate(Date registerDate) {
+		this.registerDate = registerDate;
+	}
+	public void setRegisterDate(String registerDate) {
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			try {
+				this.registerDate = transFormat.parse(registerDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
 	}
 	public Date getDelDate() {
 		return delDate;
@@ -80,7 +93,7 @@ public class BoardVo {
 	@Override
 	public String toString() {
 		return "BoardVo [num=" + num + ", writer=" + writer + ", title=" + title + ", content=" + content
-				+ ", refisterDate=" + registerDate + ", delDate=" + delDate + ", isDel=" + isDel + ", views=" + views
+				+ ", registerDate=" + registerDate + ", delDate=" + delDate + ", isDel=" + isDel + ", views=" + views
 				+ ", up=" + up + ", file=" + file + "]";
 	}
 	
