@@ -12,7 +12,7 @@ public class BoardVo {
 	private String content;
 	private Date registerDate;
 	private Date delDate;
-	private String isDel;
+	private char isDel;
 	private int views;
 	private int up;
 	private String file;	
@@ -43,9 +43,10 @@ public class BoardVo {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	// 작성일 출력방식 수정
 	public String getRegisterDate() {
-		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		return transFormat.format(registerDate);
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// SimpleDateFormat을 통해서 날짜 및 시간의 출력 서식을 변경
+		return transFormat.format(registerDate);//날짜데이터를 return함
 	}
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
@@ -57,18 +58,18 @@ public class BoardVo {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-
 	}
+	// 작성일 출력 방식 수정 끝
 	public Date getDelDate() {
 		return delDate;
 	}
 	public void setDelDate(Date delDate) {
 		this.delDate = delDate;
 	}
-	public String getIsDel() {
+	public char getIsDel() {
 		return isDel;
 	}
-	public void setIsDel(String isDel) {
+	public void setIsDel(char isDel) {
 		this.isDel = isDel;
 	}
 	public int getViews() {
@@ -95,6 +96,11 @@ public class BoardVo {
 		return "BoardVo [num=" + num + ", writer=" + writer + ", title=" + title + ", content=" + content
 				+ ", registerDate=" + registerDate + ", delDate=" + delDate + ", isDel=" + isDel + ", views=" + views
 				+ ", up=" + up + ", file=" + file + "]";
+	}
+	// 파일
+	public String getOriFile() {
+		int index = file.indexOf("_");
+		return file.substring(index+1);
 	}
 	
 

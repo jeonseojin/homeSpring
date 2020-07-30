@@ -23,13 +23,24 @@ public class BoardController {
 	
 	//게시판에 연결
 	@RequestMapping(value= "/board/list", method = RequestMethod.GET)
-	public ModelAndView boardListG(ModelAndView mv, Criteria cri){
+	public ModelAndView boardList(ModelAndView mv, Criteria cri){
 		logger.info("URI:/board/list:GET");
 	    mv.setViewName("/board/list");
 	    ArrayList<BoardVo> list= boardService.getBoardList(cri);
 	    mv.addObject("list", list);
 	    PageMaker pm = boardService.getPageMakerByBoard(cri);
 	    mv.addObject("pm", pm);
+	    return mv;
+	}
+	
+	//게시글로 연결
+	@RequestMapping(value= "/board/detail", method = RequestMethod.GET)
+	public ModelAndView detailGet(ModelAndView mv,Integer num, Criteria cri){
+		logger.info("URI:/board/detail:GET");
+	    mv.setViewName("/board/detail");
+	    BoardVo board = boardService.view(num);//조회수설정
+	    mv.addObject("board", board);
+	    mv.addObject("cri", cri);
 	    return mv;
 	}
 }

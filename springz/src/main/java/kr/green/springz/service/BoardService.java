@@ -14,4 +14,6 @@ public interface BoardService {
 
 	BoardVo getBoard(Integer num);
 
+	BoardVo view(Integer num);
+
 }

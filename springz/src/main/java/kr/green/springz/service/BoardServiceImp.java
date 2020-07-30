@@ -32,4 +32,13 @@ public class BoardServiceImp implements BoardService {
 		pm.setTotalCount(boardDao.getTotalCountByBoard(cri));
 		return pm;
 	}
+	
+	//조회수 설정
+	@Override
+	public BoardVo view(Integer num) {
+		BoardVo board =getBoard(num);
+		board.setViews(board.getViews()+1);
+		boardDao.updateBoard(board);//조회수를 증가시켜주기위해서 업데이트를 통해서 사용하기
+		return board;
+	}
 }

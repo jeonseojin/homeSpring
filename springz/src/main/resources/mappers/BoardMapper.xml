@@ -27,6 +27,7 @@
   	select count(*)
   		from board
   		where isDel='N'
+  		<!-- 페이지네이션 & 검색창 때문에 필요한것 -->
   		<if test="cri.type==0">
   				and (writer like concat('%',#{cri.search},'%')
   					or title like concat('%',#{cri.search},'%')
@@ -46,4 +47,17 @@
   	select * from board
   		where num =#{num}
   </select>
+  <!-- 저장되어 있는 내용 수정하기 위한 update -->
+  <update id="updateBoard">
+  	update board
+  		set
+  			title = #{board.title},
+  			content = #{board.content},
+  			isDel = #{board.isDel},
+  			delDate = #{board.delDate},
+  			views = #{board.views},
+  			file = #{board.file}
+  		where
+  			num=#{board.num}
+  </update>
 </mapper>

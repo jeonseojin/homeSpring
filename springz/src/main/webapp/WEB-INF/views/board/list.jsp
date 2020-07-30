@@ -32,6 +32,13 @@
 		</c:if>
     </tbody>
   </table>
+  	<ul class="pagination float-right">
+		<li>
+			<c:if test="${user != null }">
+				<a href="<%=request.getContextPath() %>/board/register" class="btn-board"><button type="button" class="btn btn-outline-success">글쓰기</button></a>
+			</c:if>
+		</li>
+	</ul>
 <!-- 페이지네이션 -->
 	<ul class="pagination justify-content-center" style="margin:20px 0">
 		<li class="page-item <c:if test="${!pm.prev}">disabled</c:if>"><a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pm.startPage-1}&type=${pm.cri.type}&search=${pm.cri.search}"><i class="fas fa-chevron-left"></i></a></li>
@@ -39,7 +46,8 @@
 			<li class="page-item <c:if test="${index==pm.cri.page}">active</c:if>"><a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${index}&type=${pm.cri.type}&search=${pm.cri.search}">${index}</a></li>
 		</c:forEach>
 		<li class="page-item <c:if test="${!pm.next}">disabled</c:if>"><a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pm.endPage+1}&type=${pm.cri.type}&search=${pm.cri.search}"><i class="fas fa-chevron-right"></i></a></li>
-	</ul>  
+		
+	</ul>
 
 <!-- 검색창 -->
 <form action="<%=request.getContextPath()%>/board/list">
@@ -55,4 +63,5 @@
 			<button class="btn btn-success" type="submit">검색</button>
 		</div>
 	</div>
+	
 </form>

@@ -50,11 +50,11 @@
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 		<interceptor>
-        <mapping path="/board/detail"/>
-        <mapping path="/board/modify"/>
-        <mapping path="/board/delete"/>
-        <beans:ref bean="authInterceptor"/>
-    </interceptor>
+	        <mapping path="/board/register"/>
+	        <mapping path="/board/modify"/>
+	        <mapping path="/board/delete"/>
+	        <beans:ref bean="authInterceptor"/>
+	    </interceptor>
 	</interceptors>
 	
 </beans:beans>

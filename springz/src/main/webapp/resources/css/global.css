@@ -22,3 +22,27 @@
 .page-link>i{
 	line-height: 21px;
 }
+.float-right{
+	float: right; 
+}
+.table-hover{
+	color: gray;
+	font-weight: normal;
+	font-size: 13px;
+}
+.title-box{
+	width: 400px;
+	color: black;
+	
+}
+.vn-box{
+	width: 40px;
+}
+.content-box{
+	margin-bottom: 20px;
+	text-align: center;
+	color: black;
+	width: 1100px;
+	min-height: 500px;
+	border-bottom: 1px solid #6c757d;
+}
