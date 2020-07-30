@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.springz.pagination.Criteria;
+import kr.green.springz.pagination.PageMaker;
 import kr.green.springz.service.BoardService;
 import kr.green.springz.vo.BoardVo;
 
@@ -21,12 +23,13 @@ public class BoardController {
 	
 	//게시판에 연결
 	@RequestMapping(value= "/board/list", method = RequestMethod.GET)
-	public ModelAndView boardListG(ModelAndView mv){
+	public ModelAndView boardListG(ModelAndView mv, Criteria cri){
 		logger.info("URI:/board/list:GET");
 	    mv.setViewName("/board/list");
-	    ArrayList<BoardVo> list;
-	    list = boardService.getBoardList();
+	    ArrayList<BoardVo> list= boardService.getBoardList(cri);
 	    mv.addObject("list", list);
+	    PageMaker pm = boardService.getPageMakerByBoard(cri);
+	    mv.addObject("pm", pm);
 	    return mv;
 	}
 }

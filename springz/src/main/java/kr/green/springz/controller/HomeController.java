@@ -54,6 +54,14 @@ public class HomeController {
 		}
 		return mv;
 	}
+	//로그아웃
+	@RequestMapping(value= "/main/signout", method = RequestMethod.GET)
+	public ModelAndView signOut(ModelAndView mv, HttpServletRequest r){
+		logger.info("URI:/main/signout:GET");
+	    mv.setViewName("redirect:/");
+	    r.getSession().removeAttribute("user");
+	    return mv;
+	}
 
 	
 	

@@ -19,7 +19,12 @@
 			      	<li class="nav-item">
 			        	<a class="nav-link" href="<%=request.getContextPath()%>/main/signin">로그인</a>
 			      	</li>  
-		      	</c:if>  
+		      	</c:if>
+		      	<c:if test="${user!=null}">
+			      	<li class="nav-item">
+				      	<a class="nav-link" href="<%=request.getContextPath()%>/main/signout">로그아웃</a>
+				    </li> 
+			    </c:if>
 	    	</ul>
 		</div> 
 	</div> 

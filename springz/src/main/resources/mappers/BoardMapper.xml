@@ -6,6 +6,44 @@
   <select id="getBoardList" resultType="kr.green.springz.vo.BoardVo">
   	select * from board
   		where isDel='N'
+  			<if test="cri.type==0">
+  				and (writer like concat('%',#{cri.search},'%')
+  					or title like concat('%',#{cri.search},'%')
+  					or content like concat('%',#{cri.search},'%'))
+  			</if>
+  			<if test="cri.type==1">
+  				and writer like concat('%',#{cri.search},'%')
+  			</if>
+  			<if test="cri.type==2">
+  				and title like concat('%',#{cri.search},'%')
+  			</if>
+  			<if test="cri.type==3">
+  				and content like concat('%',#{cri.search},'%')
+  			</if>
   		order by num desc
+  		limit #{cri.startPage},#{cri.perPageNum}
+  </select>
+  <select id="getTotalCountByBoard" resultType="int">
+  	select count(*)
+  		from board
+  		where isDel='N'
+  		<if test="cri.type==0">
+  				and (writer like concat('%',#{cri.search},'%')
+  					or title like concat('%',#{cri.search},'%')
+  					or content like concat('%',#{cri.search},'%'))
+  			</if>
+  			<if test="cri.type==1">
+  				and writer like concat('%',#{cri.search},'%')
+  			</if>
+  			<if test="cri.type==2">
+  				and title like concat('%',#{cri.search},'%')
+  			</if>
+  			<if test="cri.type==3">
+  				and content like concat('%',#{cri.search},'%')
+  			</if>
+  </select>
+  <select id="getBoard" resultType="kr.green.springz.vo.BoardVo">
+  	select * from board
+  		where num =#{num}
   </select>
 </mapper>
