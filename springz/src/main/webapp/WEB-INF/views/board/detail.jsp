@@ -10,23 +10,22 @@
     	<c:if test="${board.isDel == 'Y'.charAt(0)}">
     		<h1>해당 게시물은 삭제되었습니다.</h1>
     	</c:if>
-    	<c:if test="${board.isDel == 'N'.charAt(0)}">
-    		<h2>자유게시판</h2>         
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th class="vn-box">${board.num}</th>
-        <th>작성자: ${board.writer}</th>
-        <th class="title-box">${board.title}</th>
-        <th>${board.registerDate}</th>
-        <th class="vn-box">${board.views}</th>
-      </tr>
-    </thead>
-    <tbody>
-		<tr></tr>
-    </tbody>
-  </table>
-  	<div  class="content-box">${board.content}</div>
+    	<c:if test="${board.isDel == 'N'.charAt(0)}">        
+			<table class="table table-hover">
+				<thead>
+			    	<tr>
+				        <th class="vn-box">${board.num}</th>
+				        <th>작성자: ${board.writer}</th>
+				        <th class="title-box">${board.title}</th>
+				        <th>${board.registerDate}</th>
+				        <th class="vn-box">${board.views}</th>
+					</tr>
+			    </thead>
+			    <tbody>
+					<tr></tr>
+				</tbody>
+			</table>
+  			<div  class="content-box">${board.content}</div>
     	<a href="<%=request.getContextPath() %>/board/list?page=${cri.page}&type=${cri.type}&search=${cri.search}" class="btn-board left"><button type="button" class="btn btn-outline-secondary">목록</button></a>
 			<c:if test="${user != null }">
 				<div class="float-right">

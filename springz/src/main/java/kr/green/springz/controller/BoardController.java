@@ -2,6 +2,8 @@ package kr.green.springz.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.green.springz.pagination.Criteria;
 import kr.green.springz.pagination.PageMaker;
 import kr.green.springz.service.BoardService;
+import kr.green.springz.service.UserService;
 import kr.green.springz.vo.BoardVo;
 
 @Controller
@@ -20,6 +23,8 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private UserService userService;
 	
 	//게시판에 연결
 	@RequestMapping(value= "/board/list", method = RequestMethod.GET)
@@ -43,4 +48,23 @@ public class BoardController {
 	    mv.addObject("cri", cri);
 	    return mv;
 	}
+	
+	//게시판에서 글쓰기 화면 연결
+	@RequestMapping(value= "/board/register", method = RequestMethod.GET)
+	public ModelAndView boardRegisterGet(ModelAndView mv){
+		logger.info("URI:/board/register:GET");
+	    mv.setViewName("/board/register");
+	    return mv;
+	}
+	//게시판에서 글쓰기 기능 설정
+		@RequestMapping(value= "/board/register", method = RequestMethod.POST)
+		public ModelAndView boardRegisterPost(ModelAndView mv, BoardVo board, HttpServletRequest r){
+			logger.info("URI:/board/register:POST");
+			System.out.println(board);
+			mv.setViewName("/board/register");
+		    board.setWriter(userService.getUser(r).getId());
+		    boardService.insertBoard(board);
+		    
+		    return mv;
+		}
 }

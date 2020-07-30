@@ -41,4 +41,14 @@ public class BoardServiceImp implements BoardService {
 		boardDao.updateBoard(board);//조회수를 증가시켜주기위해서 업데이트를 통해서 사용하기
 		return board;
 	}
+	@Override
+	public void insertBoard(BoardVo board) {
+		boardDao.insertBoard(board);
+	}
+	@Override
+	public void updateBoard(BoardVo board) {
+		board.setIsDel('N');
+		boardDao.updateBoard(board);
+	}
+	
 }

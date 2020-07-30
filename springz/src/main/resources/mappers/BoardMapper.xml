@@ -60,4 +60,11 @@
   		where
   			num=#{board.num}
   </update>
+  
+  <!-- 등록 -->
+  <insert id="insertBoard">
+  	insert into
+		board(title, writer, content, file)
+		values(#{board.title}, #{board.writer}, #{board.content}, #{board.file})
+  </insert>
 </mapper>
