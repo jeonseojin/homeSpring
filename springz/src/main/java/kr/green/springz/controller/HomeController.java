@@ -1,5 +1,8 @@
 package kr.green.springz.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -8,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.springz.service.UserService;
@@ -63,6 +68,35 @@ public class HomeController {
 	    return mv;
 	}
 
+	//ajax 테스트
+	@RequestMapping(value ="/test")
+	@ResponseBody
+	public Map<Object, Object> idcheck(@RequestBody TestVo test){
+	    Map<Object, Object> map = new HashMap<Object, Object>();
+	    	System.out.println(test);
+	    map.put("res","succecc!!");
+	    return map;
+	}
 	
+}
+class TestVo{
+	private String id;
+	private int num;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	@Override
+	public String toString() {
+		return "TestVo [id=" + id + ", num=" + num + "]";
+	}
 	
 }

@@ -60,11 +60,9 @@ public class BoardController {
 		@RequestMapping(value= "/board/register", method = RequestMethod.POST)
 		public ModelAndView boardRegisterPost(ModelAndView mv, BoardVo board, HttpServletRequest r){
 			logger.info("URI:/board/register:POST");
-			System.out.println(board);
 			mv.setViewName("/board/register");
 		    board.setWriter(userService.getUser(r).getId());
 		    boardService.insertBoard(board);
-		    
 		    return mv;
 		}
 }

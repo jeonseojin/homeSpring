@@ -63,5 +63,4 @@
 			<button class="btn btn-success" type="submit">검색</button>
 		</div>
 	</div>
-	
 </form>
