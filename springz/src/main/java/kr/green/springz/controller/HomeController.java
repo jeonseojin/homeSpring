@@ -67,36 +67,5 @@ public class HomeController {
 	    r.getSession().removeAttribute("user");
 	    return mv;
 	}
-
-	//ajax 테스트
-	@RequestMapping(value ="/test")
-	@ResponseBody
-	public Map<Object, Object> idcheck(@RequestBody TestVo test){
-	    Map<Object, Object> map = new HashMap<Object, Object>();
-	    	System.out.println(test);
-	    map.put("res","succecc!!");
-	    return map;
-	}
-	
-}
-class TestVo{
-	private String id;
-	private int num;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
-	}
-	@Override
-	public String toString() {
-		return "TestVo [id=" + id + ", num=" + num + "]";
-	}
 	
 }
