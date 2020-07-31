@@ -28,6 +28,7 @@ import kr.green.springz.service.BoardService;
 import kr.green.springz.service.UserService;
 import kr.green.springz.utils.UploadFileUtils;
 import kr.green.springz.vo.BoardVo;
+import kr.green.springz.vo.UserVo;
 
 @Controller
 public class BoardController {
@@ -81,7 +82,7 @@ public class BoardController {
 	}
 	//파일 다운로드 기능
 	@ResponseBody
-	@RequestMapping("download")
+	@RequestMapping(value="/board/download")
 	public ResponseEntity<byte[]> downloadFile(String fileName)throws Exception{
 	    InputStream in = null;
 	    ResponseEntity<byte[]> entity = null;
@@ -106,5 +107,31 @@ public class BoardController {
 	        in.close();
 	    }
 	    return entity;
-	}		
+	}
+	// 게시물 수정화면
+	@RequestMapping(value= "/board/modify", method = RequestMethod.GET)
+	public ModelAndView boardModifyGet(ModelAndView mv, Integer num, HttpServletRequest r){
+		logger.info("URI:/board/modify:GET");
+	    mv.setViewName("/board/modify");
+	    BoardVo board = boardService.getBoard(num);
+	    UserVo user = userService.getUser(r);
+	    if(board == null || !user.getId().equals(board.getWriter()))
+	    	mv.setViewName("redirect:/board/list");
+	    mv.addObject("board", board);
+	    return mv;
+	}
+	
+	@RequestMapping(value= "/board/modify", method = RequestMethod.POST)
+	public ModelAndView boardModifyPost(ModelAndView mv, HttpServletRequest r,BoardVo board,MultipartFile file2) throws IOException, Exception{
+	    mv.setViewName("redirect:/board/list");
+	    board.setWriter(userService.getUser(r).getId());
+	    if(!file2.getOriginalFilename().equals("")) {
+	    	String fileName = UploadFileUtils.uploadFile(uploadPath, file2.getOriginalFilename(), file2.getBytes());
+	    	board.setFile(fileName);
+	    }else if(board.getFile()==null || board.getFile().equals("")) {
+	    	board.setFile(null);
+	    }
+	    boardService.updateBoard(board);
+	    return mv;
+	}
 }

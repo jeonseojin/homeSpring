@@ -3,6 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.green.springz.dao.BoardDao">
+
+<!-- 보드의 내용을 저장해놓은것 -->
   <select id="getBoardList" resultType="kr.green.springz.vo.BoardVo">
   	select * from board
   		where isDel='N'
@@ -23,11 +25,13 @@
   		order by num desc
   		limit #{cri.startPage},#{cri.perPageNum}
   </select>
+  
+<!-- 페이지네이션 & 검색창 때문에 필요한것 -->
   <select id="getTotalCountByBoard" resultType="int">
   	select count(*)
   		from board
   		where isDel='N'
-  		<!-- 페이지네이션 & 검색창 때문에 필요한것 -->
+  		
   		<if test="cri.type==0">
   				and (writer like concat('%',#{cri.search},'%')
   					or title like concat('%',#{cri.search},'%')
@@ -43,11 +47,14 @@
   				and content like concat('%',#{cri.search},'%')
   			</if>
   </select>
+  
+<!-- 게시판의 모든 정보 -->
   <select id="getBoard" resultType="kr.green.springz.vo.BoardVo">
   	select * from board
   		where num =#{num}
   </select>
-  <!-- 저장되어 있는 내용 수정하기 위한 update -->
+  
+<!-- 저장되어 있는 내용 수정하기 위한 update -->
   <update id="updateBoard">
   	update board
   		set
@@ -61,7 +68,7 @@
   			num=#{board.num}
   </update>
   
-  <!-- 등록 -->
+<!-- 등록 -->
   <insert id="insertBoard">
   	insert into
 		board(title, writer, content, file)

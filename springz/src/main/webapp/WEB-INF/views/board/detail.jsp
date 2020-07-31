@@ -16,6 +16,7 @@
 			    	<tr>
 				        <th class="vn-box">${board.num}</th>
 				        <th>작성자: ${board.writer}</th>
+				        <th class="mo-title">제목:</th>
 				        <th class="title-box">${board.title}</th>
 				        <th>${board.registerDate}</th>
 				        <th class="vn-box">${board.views}</th>
@@ -25,13 +26,16 @@
 					<tr></tr>
 				</tbody>
 			</table>
-  			<div  class="content-box">${board.content}</div>
+			<c:if test="${board.file!=null}"><a class="float-right" href="<%=request.getContextPath()%>/board/download?fileName=${board.file}">${board.oriFile}</a></c:if>
+  			<div  class="content-box bot">
+  			${board.content}
+  			</div>
     	<a href="<%=request.getContextPath() %>/board/list?page=${cri.page}&type=${cri.type}&search=${cri.search}" class="btn-board left"><button type="button" class="btn btn-outline-secondary">목록</button></a>
 			<c:if test="${user != null }">
 				<div class="float-right">
 					<c:if test="${user.id == board.writer}">
-						<a href="<%=request.getContextPath() %>/board/modify?num=${board.num}" class="btn-board mama"><button type="button" class="btn btn-outline-info">수정</button></a>
-						<a href="<%=request.getContextPath() %>/board/delete?num=${board.num}" class="btn-board mama"><button type="button" class="btn btn-outline-danger">삭제</button></a>
+						<a href="<%=request.getContextPath() %>/board/modify?num=${board.num}" class="btn-board"><button type="button" class="btn btn-outline-info">수정</button></a>
+						<a href="<%=request.getContextPath() %>/board/delete?num=${board.num}" class="btn-board"><button type="button" class="btn btn-outline-danger">삭제</button></a>
 					</c:if>
 				</div>
 			</c:if>
@@ -39,3 +43,6 @@
 	</c:if>
 </form>
 <input type="hidden" id="num" value="${board.num }">
+<script>
+	
+</script>
