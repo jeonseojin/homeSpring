@@ -41,7 +41,7 @@ public class HomeController {
 	//로그인 화면
 	@RequestMapping(value= "/main/signin", method = RequestMethod.GET)
 	public ModelAndView signinGet(ModelAndView mv){
-		logger.info("URI:/main/signin:GET");
+		logger.info("URI:/signin:GET");
 	    mv.setViewName("/main/signin");
 	    return mv;
 	}
@@ -49,7 +49,7 @@ public class HomeController {
 	//로그인 관련 동작
 	@RequestMapping(value= "/main/signin", method = RequestMethod.POST)
 	public ModelAndView signinPost(ModelAndView mv, UserVo user){
-		logger.info("URI:/main/signin");
+		logger.info("URI:/signin");
 		UserVo dbUser = userService.isUser(user);
 		if(dbUser!=null) {
 			mv.setViewName("redirect:/board/list");
@@ -62,10 +62,41 @@ public class HomeController {
 	//로그아웃
 	@RequestMapping(value= "/main/signout", method = RequestMethod.GET)
 	public ModelAndView signOut(ModelAndView mv, HttpServletRequest r){
-		logger.info("URI:/main/signout:GET");
+		logger.info("URI:/signout:GET");
 	    mv.setViewName("redirect:/");
 	    r.getSession().removeAttribute("user");
 	    return mv;
 	}
 	
+	//회원가입 화면 연결
+	@RequestMapping(value= "/main/signup", method = RequestMethod.GET)
+	public ModelAndView signup(ModelAndView mv){
+		logger.info("URI:/signup:GET");
+	    mv.setViewName("/main/signup");
+	    return mv;
+	}
+	//회원가입 정보 전송
+	@RequestMapping(value= "/main/signup", method = RequestMethod.POST)
+	public ModelAndView signupPost(ModelAndView mv,UserVo user){
+		logger.info("URI:/signup");
+		System.out.println(user);
+		if(userService.signup(user)) {
+			System.out.println(user);
+			mv.setViewName("redirect:/");
+		}
+		else {
+			mv.setViewName("redirect:/main/signup");
+			System.out.println(user);
+			mv.addObject("user", user);
+		}
+	    return mv;
+	}
+	//아이디 중복 확인
+	@RequestMapping(value ="/idCheck")
+	@ResponseBody
+	public Map<Object, Object> idcheck(@RequestBody String id){
+	    Map<Object, Object> map = new HashMap<Object, Object>();
+	    map.put("res",userService.getUser(id)==null);
+	    return map;
+	}
 }

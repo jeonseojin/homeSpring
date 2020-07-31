@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import kr.green.springz.pagination.Criteria;
 import kr.green.springz.pagination.PageMaker;
 import kr.green.springz.vo.BoardVo;
+import kr.green.springz.vo.UserVo;
 
 public interface BoardService {
 
@@ -19,4 +20,6 @@ public interface BoardService {
 	void insertBoard(BoardVo board);
 
 	void updateBoard(BoardVo board);
+
+	void deleteBoard(Integer num, UserVo user);
 }

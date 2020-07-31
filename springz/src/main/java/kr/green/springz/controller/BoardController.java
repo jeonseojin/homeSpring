@@ -120,7 +120,7 @@ public class BoardController {
 	    mv.addObject("board", board);
 	    return mv;
 	}
-	
+	// 게시물 수정 기능
 	@RequestMapping(value= "/board/modify", method = RequestMethod.POST)
 	public ModelAndView boardModifyPost(ModelAndView mv, HttpServletRequest r,BoardVo board,MultipartFile file2) throws IOException, Exception{
 	    mv.setViewName("redirect:/board/list");
@@ -134,4 +134,14 @@ public class BoardController {
 	    boardService.updateBoard(board);
 	    return mv;
 	}
+	
+	//게시글 삭제
+		@RequestMapping(value= "/board/delete", method = RequestMethod.GET)
+		public ModelAndView boarDelete(ModelAndView mv,Integer num,HttpServletRequest r){
+			logger.info("URI:/board/delete:GET");
+		    mv.setViewName("redirect:/board/list");
+		    boardService.deleteBoard(num, userService.getUser(r));
+		    return mv;
+		}
+	
 }

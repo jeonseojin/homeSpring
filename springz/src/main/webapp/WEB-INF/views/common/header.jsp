@@ -14,7 +14,7 @@
 		      	</li>
 		      	<c:if test="${user == null}">
 			      	<li class="nav-item">
-			        	<a class="nav-link" href="#">회원가입</a>
+			        	<a class="nav-link" href="<%=request.getContextPath()%>/main/signup">회원가입</a>
 			      	</li>
 			      	<li class="nav-item">
 			        	<a class="nav-link" href="<%=request.getContextPath()%>/main/signin">로그인</a>
