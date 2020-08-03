@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -61,6 +64,22 @@ public class BoardController {
 	    mv.addObject("board", board);
 	    mv.addObject("cri", cri);
 	    return mv;
+	}
+	//좋아요 기능
+	@RequestMapping(value ="/board/up", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<Object, Object> boardUp(@RequestBody int num, HttpServletRequest r){
+	    Map<Object, Object> map = new HashMap<Object, Object>();
+	    //현재 로그인 중인 유저 정보
+	    UserVo user = userService.getUser(r);
+	    if(user == null) {
+	    	map.put("isUser",false);
+	    }else {
+	    	map.put("isUser",true);
+	    	int up = boardService.updateUp(num, user.getId());
+	    	map.put("up",up);
+	    }
+	    return map;
 	}
 	
 	//게시판에서 글쓰기 화면 연결

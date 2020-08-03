@@ -19,4 +19,10 @@ public interface BoardDao {
 
 	void insertBoard(@Param("board")BoardVo board);
 
+	int selectUp(@Param("boNum")int num, @Param("id")String id);
+
+	void insertUp(@Param("boNum")int num, @Param("id")String id);
+
+	void updateBoardByUp(@Param("num")int num);
+
 }

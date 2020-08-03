@@ -74,4 +74,18 @@
 		board(title, writer, content, file)
 		values(#{board.title}, #{board.writer}, #{board.content}, #{board.file})
   </insert>
+
+<!-- 좋아요 -->
+	<select id="selectUp" resultType="int">
+		select count(*) from up where boNum = #{boNum} and id = #{id}
+	</select>
+	<insert id="insertUp">
+		insert into up(id,boNum) values(#{id},#{boNum})
+	</insert>
+	<update id="updateBoardByUp">
+		update board
+		set
+			up = (select count(*) from up where boNum = #{num})
+		where num = #{num}
+	</update>
 </mapper>

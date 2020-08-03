@@ -59,6 +59,7 @@ public class BoardServiceImp implements BoardService {
 		board.setIsDel('N');
 		boardDao.updateBoard(board);
 	}
+	//게시글 삭제
 	@Override
 	public void deleteBoard(Integer num, UserVo user) {
 		BoardVo board = boardDao.getBoard(num);
@@ -69,6 +70,15 @@ public class BoardServiceImp implements BoardService {
 		board.setIsDel('Y');
 		board.setDelDate(new Date());
 		boardDao.updateBoard(board);
+	}
+	//좋아요 증가
+	@Override
+	public int updateUp(int num, String id) {
+		if(boardDao.selectUp(num,id)!=0) return -1;//일치하는 값이 있는지 검색 이미 추천한 경우 -1 리턴
+		boardDao.insertUp(num,id);// 추천 등록
+		boardDao.updateBoardByUp(num);//게시글의 추천만 업뎃
+		BoardVo board = boardDao.getBoard(num);
+		return board.getUp();
 	}
 	
 }

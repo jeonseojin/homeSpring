@@ -22,4 +22,6 @@ public interface BoardService {
 	void updateBoard(BoardVo board);
 
 	void deleteBoard(Integer num, UserVo user);
+
+	int updateUp(int num, String id);
 }
